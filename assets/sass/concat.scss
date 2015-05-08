@@ -1,0 +1,459 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ */
+
+@import "susy";
+
+@import "partials/normalize";
+@import "partials/utilities";
+
+@import "compass";
+
+/* Start SUSY Grid */
+$susy: (
+  columns: 12,  // The number of columns in your grid
+  gutters: 2/3, // The size of a gutter in relation to a single column
+  column-width: 3em,
+  use-custom: (
+    clearfix: true
+  )
+);
+
+
+@font-face {
+    font-family: 'icomoon';
+    src:url('../fonts/icomoon.eot?-9lytiu');
+    src:url('../fonts/icomoon.eot?#iefix-9lytiu') format('embedded-opentype'),
+        url('../fonts/icomoon.woff?-9lytiu') format('woff'),
+        url('../fonts/icomoon.ttf?-9lytiu') format('truetype'),
+        url('../fonts/icomoon.svg?-9lytiu#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+$icon_cart: "\e600";
+$icon_cart2: "\e601";
+$icon_cart3: "\e602";
+$icon_facebook: "\e603";
+$icon_facebook2: "\e604";
+$icon_facebook3: "\e605";
+$icon_instagram: "\e606";
+$icon_twitter: "\e607";
+$icon_twitter2: "\e608";
+$icon_twitter3: "\e609";
+$icon_pinterest: "\e60a";
+$icon_pinterest2: "\e60b";
+$icon_pinterest3: "\e60e";
+$icon_truck: "\e60c";
+$icon_cart4: "\e60d";
+
+
+//green r 64 g 66 b 40
+//text  r 84 g 84 b 36
+$primary: #869C80;
+$secondary: #FBD258;
+$contrast: #44BF87;
+$text: rgb(84,84,36);
+$text: darken($text, 20%);
+
+$button_color: $primary;
+$button_color_attention: $secondary;
+$header_color: $primary;
+$footer_color: darken($primary, 10%);
+$spanner_color: $primary;
+$overlay_color: lighten($secondary, 30%);
+$overlay_text: $text;
+
+$link_color: darken($contrast, 10%);
+$link_hover: darken($contrast, 60%);
+
+$icon_cart: $icon_cart2;
+$icon_facebook: $icon_facebook;
+$icon_twitter: $icon_twitter;
+$icon_pinterest: $icon_pinterest3;
+$icon_instagram: $icon_instagram;
+
+$icon_color: $text;
+$icon_size: 1.5em;
+
+$placeholder_color: lighten($text, 50%);
+$input_color: $placeholder_color;
+
+$facebook_color: #3b5998;
+$twitter_color: #00aced;
+$pinterest_color: #cb2027;
+$instagram_color: #517fa4;
+
+$full_block_baseline: 3;
+
+$footer_height: 15em;
+$header_height: 5em;
+$banner_height: 15em + $header_height;
+$full_block_short_height: 3em * $full_block_baseline;
+$full_block_tall_height: 9em * $full_block_baseline;
+$full_block_medium_height: 6em * $full_block_baseline;
+
+$container_padding: 1.5em;
+$section_padding: 3em;
+
+.container {
+    @include container(60em);
+    padding: 0 $container_padding;
+}
+
+html, body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Open Sans', sans-serif;
+    color: $text;
+}
+
+main {
+    margin-bottom: $footer_height;
+    background-color: white;
+    z-index: 10;
+}
+
+section {
+    @include box-sizing(border-box);
+    padding: $section_padding 0;
+}
+
+body {
+    > header {
+        position: fixed;
+        width: 100%;
+        background-color: transparentize($header_color, .05);
+        height: $header_height;
+        max-height: $header_height;
+        top: 0;
+        @include box-sizing(border-box);
+        padding: $section_padding/3 0;
+        z-index: 100;
+        .branding, .cart {
+        //    margin: .25em 0;
+            padding: .75em 0;
+        }
+        .branding {
+            @include span(4 of 12);
+        }
+        nav {
+            @include span(isolate 4 at 4);
+            ul {
+                margin: 0;
+            }
+            li {
+                display: inline;
+                text-align: center;
+                @include span(4 of 12);
+                a {
+                    @include transition;
+                    @include border-radius(6px);
+                    display: block;
+                    padding: .75em 0;
+                    @include link-colors($text, lighten($text, 30%));
+                }
+                &.last {
+                    @include last;
+                }
+                &:hover {
+                    a {
+                        background-color: darken($header_color, 20%);
+                    }
+
+                }
+            }
+        }
+        .cart {
+            @include span(1 last of 12);
+          .items {
+              text-align: right;
+            &:after {
+                font-family: 'icomoon';
+                content: $icon_cart;
+                position: absolute;
+                padding-left: .5em;
+                font-size: $icon_size;
+            }
+          }
+        }
+    }
+    > footer {
+        position: fixed;
+        height: $footer_height;
+        width: 100%;
+        bottom: 0;
+        background-color: darken($footer_color, 20%);
+        z-index: -1;
+        @include box-sizing(border-box);
+        padding: $section_padding/2 0;
+        .footer-left {
+            @include span(isolate 4 at 2);
+        }
+        .footer-right {
+            @include span(isolate 4 at 8);
+        }
+        .footer-left {
+            img {
+                width: 50%;
+                margin: 0 25% 0 25%;
+            }
+            text-align: center;
+        }
+        .footer-right {
+            //@include last;
+            p {
+                text-align: center;
+            }
+        }
+        .social {
+            @include clearfix;
+            margin: $container_padding*2 0;
+            li {
+                display: inline-block;
+                @include span(3 of 12);
+                @include border-radius(6px);
+                &.last {
+                    @include last;
+                }
+                &:hover {
+                    background-color: darken($footer_color, 30%);
+                    &:after {
+                        color: lighten($text, 30%);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.leftcolumn, .rightcolumn {
+    @include span(6 of 12);
+}
+.rightcolumn {
+    @include last;
+}
+
+.map {
+    @include full;
+}
+
+.centered {
+    @include span(isolate 10 at 2);
+}
+
+.blocks {
+    @include full;
+    margin: 0;
+    padding: 0;
+    .block {
+        margin: $container_padding*2 0;
+        list-style: none;
+        @include span(4 of 12);
+        @include pre(1);
+        @include post(1);
+        position: relative;
+        overflow: hidden;
+        img {
+            @include full;
+        }
+        h1, h2, h3, h4, p {
+            text-align: center;
+            clear: both;
+            color: $overlay_text;
+        }
+        &:hover {
+            .overlay {
+                bottom: 0;
+            }
+        }
+        .overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            bottom: -75%;
+            @include transition;
+            background: transparentize($overlay_color, .2);
+            @include box-sizing(border-box);
+            padding: $container_padding/2;
+        }
+    }
+}
+
+.full-block-section {
+    @include clearfix;
+    .half {
+        width: 50%;
+        float: left;
+        margin: 0;
+        + .half {
+            float: right;
+        }
+    }
+}
+
+.full-block {
+    @include clearfix;
+    width: 100%;
+    &.tall {
+        min-height: $full_block_tall_height;
+    }
+    &.medium {
+        min-height: $full_block_medium_height;
+    }
+    &.short {
+        min-height: $full_block_short_height;
+    }
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+$form_exit_size: 6em;
+
+.form-popup {
+    display: none;
+    &.active {
+        display: block;
+    }
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparentize(darken($primary, 30%), .1);
+    @include box-sizing(border-box);
+    padding: 10% 0;
+    z-index: 1000;
+    .form-exit{
+        position: absolute;
+        right: 1em;
+        top: .5em;
+        width: $form_exit_size;
+        height: $form_exit_size;
+        &:after {
+            content: "x";
+            font-size: 4em;
+            color: $input_color;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+    }
+    .form-group {
+        margin: $container_padding*2 0;
+        @include clearfix;
+    }
+    input, textarea {
+        font-family: 'Open Sans', sans-serif;
+        @include appearance(none);
+        @include full;
+        @include box-sizing(border-box);
+        background: transparent;
+        border: none;
+        padding: 1em;
+        border-bottom: 2px solid $secondary;
+        outline: none;
+        color: $input_color;
+        font-size: 1.5em;
+        &::-webkit-input-placeholder {
+    	   color: $placeholder_color;
+    	}
+    	&:-moz-placeholder {
+    	   color: $placeholder_color;
+    	}
+    	&::-moz-placeholder {
+    	   color: $placeholder_color;
+    	}
+    	&:-ms-input-placeholder {
+    	   color: $placeholder_color;
+    	}
+    }
+    input[type=submit] {
+        background: $primary;
+        border-bottom: none;
+        @include transition;
+        color: $text;
+        @include border-radius(6px);
+        &:hover {
+            background: $secondary;
+            color: white;
+        }
+    }
+}
+
+.banner {
+    min-height: $banner_height;
+    z-index: 0;
+    .banner-image {
+        background-position: center top;
+		background-size: cover;
+        background-repeat: no-repeat;
+		width: 100%;
+		height: $banner_height;
+        position: fixed;
+        z-index: -1;
+    }
+}
+
+.spanner {
+    background-color: $spanner_color;
+}
+
+.button {
+    @include button(white, $button_color);
+}
+.button-attention {
+    @include button(white, $button_color_attention);
+}
+.button-footer {
+    @include button(white, $button_color_attention);
+}
+
+.social {
+    list-style: none;
+    li {
+        &:after {
+            font-family: 'icomoon';
+            color: $icon_color;
+            display: block;
+            text-align: center;
+            padding: .75em 0;
+            font-size: $icon_size;
+            @include transition;
+        }
+        @include transition;
+    }
+    .facebook {
+        &:after {
+            content: $icon_facebook;
+
+        }
+    }
+    .instagram {
+        &:after {
+            content: $icon_instagram;
+        }
+    }
+    .pinterest {
+        &:after {
+            content: $icon_pinterest;
+        }
+    }
+    .twitter {
+        &:after {
+            content: $icon_twitter;
+        }
+    }
+}
+
+a {
+    @include link-colors($link_color, $link_hover);
+    text-decoration: none;
+    @include transition;
+}
+
+.accessible {
+    @include accessible_hidden;
+}
